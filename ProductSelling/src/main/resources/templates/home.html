@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Key Store</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav>
+    <div class="container">
+        <a href="/" class="logo">ProductKeyStore</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/cart">Cart</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero">
+    <div class="hero-content">
+        <h1>Find the Best Product Keys for Your Needs</h1>
+        <p>Quality keys for software, games, and more at unbeatable prices!</p>
+        <a href="/products" class="btn">Shop Now</a>
+    </div>
+</header>
+
+<!-- Featured Products -->
+<section class="featured-products">
+    <div class="container">
+        <h2>Featured Products</h2>
+        <div class="products" th:each="product : ${featuredProducts}">
+            <div class="product">
+                <h3 th:text="${product.name}">Product Name</h3>
+                <p th:text="${product.description}">Product Description</p>
+                <p th:text="${product.price}">Price</p>
+                <a th:href="@{/products/{id}(id=${product.id})}" class="btn">View Product</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Product Categories -->
+<section class="product-categories">
+    <div class="container">
+        <h2>Browse Categories</h2>
+        <div class="categories">
+            <div class="category" th:each="category : ${categories}">
+                <a th:href="@{/categories/{id}(id=${category.id})}">
+                    <h3 th:text="${category.name}">Category Name</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Customer Testimonials -->
+<section class="testimonials">
+    <div class="container">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial" th:each="testimonial : ${testimonials}">
+            <p th:text="${testimonial.message}">Customer feedback</p>
+            <p><strong th:text="${testimonial.name}">Customer Name</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information -->
+<footer class="footer">
+    <div class="container">
+        <p>Contact us at <a href="mailto:info@productkeystore.com">info@productkeystore.com</a> or call +123 456 7890</p>
+        <p>Follow us on:</p>
+        <div class="social-links">
+            <a href="#"><img src="/images/facebook-icon.png" alt="Facebook"></a>
+            <a href="#"><img src="/images/twitter-icon.png" alt="Twitter"></a>
+            <a href="#"><img src="/images/instagram-icon.png" alt="Instagram"></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
