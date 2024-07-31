@@ -17,13 +17,19 @@ public class ProductController {
     @GetMapping
     public String listProducts(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return "product-list";
+        return "product_list";
+    }
+    @GetMapping("/{id}")
+    public String getProductById(@PathVariable Long id, Model model) {
+       Product product= productService.getProductById(id);
+        model.addAttribute("product", product);
+        return "product";
     }
 
     @GetMapping("/new")
     public String showProductForm(Model model) {
         model.addAttribute("product", new Product());
-        return "product-form";
+        return "product_form";
     }
 
     @PostMapping
@@ -36,7 +42,7 @@ public class ProductController {
     public String showEditForm(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
         model.addAttribute("product", product);
-        return "product-form";
+        return "product_form";
     }
 
     @GetMapping("/delete/{id}")

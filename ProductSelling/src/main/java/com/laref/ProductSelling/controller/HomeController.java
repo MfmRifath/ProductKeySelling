@@ -19,6 +19,6 @@ public class HomeController {
     public String home(Model model) {
         List<Product> featuredProducts = productService.getAllProducts(); // For simplicity, using all products as featured
         model.addAttribute("featuredProducts", featuredProducts);
-        return "index";
+        return "home";
     }
 }

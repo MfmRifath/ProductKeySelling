@@ -14,7 +14,7 @@
             <li><a href="/products">Products</a></li>
             <li><a href="/about">About Us</a></li>
             <li><a href="/contact">Contact</a></li>
-            <li><a href="/cart">Cart</a></li>
+            <li><a href="/carts">Cart</a></li>
         </ul>
     </div>
 </nav>
@@ -35,7 +35,9 @@
         <div class="products" th:each="product : ${featuredProducts}">
             <div class="product">
                 <h3 th:text="${product.name}">Product Name</h3>
+                <img th:src="${product.image}"/>
                 <p th:text="${product.description}">Product Description</p>
+                <p th:text="${product.category}">Product Category</p>
                 <p th:text="${product.price}">Price</p>
                 <a th:href="@{/products/{id}(id=${product.id})}" class="btn">View Product</a>
             </div>
@@ -43,19 +45,8 @@
     </div>
 </section>
 
-<!-- Product Categories -->
-<section class="product-categories">
-    <div class="container">
-        <h2>Browse Categories</h2>
-        <div class="categories">
-            <div class="category" th:each="category : ${categories}">
-                <a th:href="@{/categories/{id}(id=${category.id})}">
-                    <h3 th:text="${category.name}">Category Name</h3>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+
+
 
 <!-- Customer Testimonials -->
 <section class="testimonials">

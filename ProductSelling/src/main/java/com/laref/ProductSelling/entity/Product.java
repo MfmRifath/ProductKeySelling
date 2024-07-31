@@ -15,6 +15,9 @@ public class Product {
     private String productKey;
     private double price;
 
+    private String Category;
+    private String image;
+
     // Getters and setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -30,4 +33,22 @@ public class Product {
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+
+    public String getCategory() {
+        return Category;
+    }
+
+    public void setCategory(String category) {
+        Category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
 }
