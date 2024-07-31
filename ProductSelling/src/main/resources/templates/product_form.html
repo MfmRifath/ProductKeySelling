@@ -2,38 +2,131 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Product Form</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            border-color: #5cb85c;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            button {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>Product Form</h1>
-<form th:action="@{/products}" th:object="${product}" method="post" enctype="multipart/form-data">
-    <input type="hidden" th:field="*{id}" />
-    <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" th:field="*{name}" required />
-    </div>
-    <div>
-        <label for="description">Description</label>
-        <textarea id="description" th:field="*{description}" required></textarea>
-    </div>
-    <div>
-        <label for="category">Category</label>
-        <input type="text" id="category" th:field="*{category}" required />
-    </div>
-    <div>
-        <label for="productKey">Product Key</label>
-        <input type="text" id="productKey" th:field="*{productKey}" required />
-    </div>
-    <div>
-        <label for="image">Product Image</label>
-        <input type="file" id="image" name="imageFile">
-    </div>
-    <div>
-        <label for="price">Price</label>
-        <input type="number" id="price" th:field="*{price}" step="0.01" required />
-    </div>
-    <div>
-        <button type="submit">Save</button>
-    </div>
-</form>
+<div class="form-container">
+    <h1>Product Form</h1>
+    <form th:action="@{/products}" th:object="${product}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" th:field="*{name}" required />
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea id="description" th:field="*{description}" required></textarea>
+        </div>
+        <div>
+            <label for="category">Category</label>
+            <input type="text" id="category" th:field="*{category}" required />
+        </div>
+        <div>
+            <label for="productKey">Product Key</label>
+            <input type="text" id="productKey" th:field="*{productKey}" required />
+        </div>
+        <div>
+            <label for="image">Product Image</label>
+            <input type="file" id="image" name="imageFile">
+        </div>
+        <div>
+            <label for="price">Price</label>
+            <input type="number" id="price" th:field="*{price}" step="0.01" required />
+        </div>
+        <div>
+            <button type="submit">Save</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

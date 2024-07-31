@@ -3,6 +3,172 @@
 <head>
     <title>Shopping Cart</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            color: #fff;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav .nav-links li {
+            margin-left: 20px;
+        }
+
+        nav .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav .nav-links a:hover {
+            color: #ddd;
+        }
+
+        .cart-items {
+            padding: 20px 0;
+        }
+
+        .cart-items .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-items h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #333;
+            text-align: center;
+        }
+
+        .cart-items ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cart-items li {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-items img {
+            width: 100px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+
+        .cart-items h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .cart-items p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .cart-items .btn {
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cart-items .btn:hover {
+            background-color: #c9302c;
+        }
+
+        .cart-total {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .cart-total h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .cart-total .btn {
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .cart-total .btn:hover {
+            background-color: #4cae4c;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer p, .footer a {
+            color: #fff;
+            margin: 5px 0;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ddd;
+        }
+
+        .social-links img {
+            width: 24px;
+            height: auto;
+            margin: 0 5px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links img:hover {
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
 <nav>
@@ -27,7 +193,7 @@
         <div th:if="${not #lists.isEmpty(carts)}">
             <ul>
                 <li th:each="item : ${carts}">
-                    <img th:src="@{/images/products/{image}(image=${item.product.image})}" alt="Product Image">
+                    <img th:src="${item.product.image}" alt="Product Image">
                     <div>
                         <h3 th:text="${item.product.name}">Product Name</h3>
                         <p th:text="'Price: $' + ${item.product.price}">Price</p>
