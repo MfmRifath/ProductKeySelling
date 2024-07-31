@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- Set the page title to the product name -->
     <title th:text="${product.name}">Product Details</title>
 </head>
 <body>
+<!-- Display the product name -->
 <h1 th:text="${product.name}">Product Name</h1>
+
+<!-- Display the product image -->
 <img th:src="@{/images/products/{image}(image=${product.image})}" alt="Product Image">
+
+<!-- Display the product description -->
 <p th:text="${product.description}">Product Description</p>
+
+<!-- Display the product category -->
 <p><strong>Category:</strong> <span th:text="${product.category}">Category</span></p>
+
+<!-- Display the product price -->
 <p><strong>Price:</strong> $<span th:text="${product.price}">Price</span></p>
+
+<!-- Form to add the product to the cart -->
 <form th:action="@{/carts/add}" method="post">
     <input type="hidden" name="productId" th:value="${product.id}">
+    <input type="number" name="quantity" min="1" value="1">
     <button type="submit">Add to Cart</button>
 </form>
 </body>

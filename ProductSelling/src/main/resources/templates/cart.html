@@ -21,7 +21,7 @@
 <section class="cart-items">
     <div class="container">
         <h1>Shopping Cart</h1>
-        <div th:if="${cartItems.isEmpty()}">
+        <div th:if="${#lists.isEmpty(carts)}">
             <p>Your cart is empty.</p>
         </div>
         <div th:if="${not #lists.isEmpty(carts)}">
@@ -32,7 +32,7 @@
                         <h3 th:text="${item.product.name}">Product Name</h3>
                         <p th:text="'Price: $' + ${item.product.price}">Price</p>
                         <p th:text="'Quantity: ' + ${item.quantity}">Quantity</p>
-                        <p th:text="'Total: $' + ${item.quantity * item.product.price}">Total</p>
+                        <p th:text="'Total: $' + (${item.quantity} * ${item.product.price ?: 0})">Total</p>
                     </div>
                     <form th:action="@{/carts/remove}" method="post">
                         <input type="hidden" name="cartItemId" th:value="${item.id}">
@@ -41,7 +41,7 @@
                 </li>
             </ul>
             <div class="cart-total">
-                <h3>Total: $<span th:text="${#numbers.formatDecimal(#lists.sum(carts, 'quantity * product.price'), 2)}"></span></h3>
+                <h3>Total: $<span th:text="${total}"></span></h3>
                 <form th:action="@{/carts/clear}" method="post">
                     <button type="submit" class="btn">Clear Cart</button>
                 </form>
