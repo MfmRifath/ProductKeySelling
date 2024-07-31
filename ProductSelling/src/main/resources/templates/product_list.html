@@ -8,6 +8,7 @@
 <a href="/products/new">Add New Product</a>
 <div th:each="product : ${products}">
   <h2 th:text="${product.name}">Product Name</h2>
+  <img th:src="${product.image}"/>
   <p th:text="${product.description}">Product Description</p>
   <p th:text="${product.price}">Price</p>
   <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>

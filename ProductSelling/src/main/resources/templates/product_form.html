@@ -5,23 +5,31 @@
 </head>
 <body>
 <h1>Product Form</h1>
-<form th:action="@{/products}" th:object="${product}" method="post">
+<form th:action="@{/products}" th:object="${product}" method="post" enctype="multipart/form-data">
     <input type="hidden" th:field="*{id}" />
     <div>
-        <label>Name</label>
-        <input type="text" th:field="*{name}" />
+        <label for="name">Name</label>
+        <input type="text" id="name" th:field="*{name}" required />
     </div>
     <div>
-        <label>Description</label>
-        <textarea th:field="*{description}"></textarea>
+        <label for="description">Description</label>
+        <textarea id="description" th:field="*{description}" required></textarea>
     </div>
     <div>
-        <label>Product Key</label>
-        <input type="text" th:field="*{productKey}" />
+        <label for="category">Category</label>
+        <input type="text" id="category" th:field="*{category}" required />
     </div>
     <div>
-        <label>Price</label>
-        <input type="number" th:field="*{price}" step="0.01" />
+        <label for="productKey">Product Key</label>
+        <input type="text" id="productKey" th:field="*{productKey}" required />
+    </div>
+    <div>
+        <label for="image">Product Image</label>
+        <input type="file" id="image" name="imageFile">
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <input type="number" id="price" th:field="*{price}" step="0.01" required />
     </div>
     <div>
         <button type="submit">Save</button>

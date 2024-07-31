@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+</head>
+<body>
+<h1>Error</h1>
+<p>Status code: <span th:text="${statusCode}">Unknown</span></p>
+<p>Error message: <span th:text="${errorMessage}">An unexpected error occurred.</span></p>
+</body>
+</html>

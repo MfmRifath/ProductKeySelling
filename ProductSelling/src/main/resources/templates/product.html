@@ -3,28 +3,128 @@
 <head>
     <!-- Set the page title to the product name -->
     <title th:text="${product.name}">Product Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        p strong {
+            color: #333;
+        }
+
+        .price {
+            font-size: 24px;
+            color: #d9534f;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .price {
+                font-size: 20px;
+            }
+
+            button {
+                padding: 8px 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-<!-- Display the product name -->
-<h1 th:text="${product.name}">Product Name</h1>
+<div class="container">
+    <!-- Display the product name -->
+    <h1 th:text="${product.name}">Product Name</h1>
 
-<!-- Display the product image -->
-<img th:src="@{/images/products/{image}(image=${product.image})}" alt="Product Image">
+    <!-- Display the product image -->
+    <img th:src="@{'/images/products/' + ${product.image}}" alt="Product Image">
 
-<!-- Display the product description -->
-<p th:text="${product.description}">Product Description</p>
+    <!-- Display the product description -->
+    <p th:text="${product.description}">Product Description</p>
 
-<!-- Display the product category -->
-<p><strong>Category:</strong> <span th:text="${product.category}">Category</span></p>
+    <!-- Display the product category -->
+    <p><strong>Category:</strong> <span th:text="${product.category}">Category</span></p>
 
-<!-- Display the product price -->
-<p><strong>Price:</strong> $<span th:text="${product.price}">Price</span></p>
+    <!-- Display the product price -->
+    <p class="price"><strong>Price:</strong> $<span th:text="${product.price}">Price</span></p>
 
-<!-- Form to add the product to the cart -->
-<form th:action="@{/carts/add}" method="post">
-    <input type="hidden" name="productId" th:value="${product.id}">
-    <input type="number" name="quantity" min="1" value="1">
-    <button type="submit">Add to Cart</button>
-</form>
+    <!-- Form to add the product to the cart -->
+    <form th:action="@{/carts/add}" method="post">
+        <input type="hidden" name="productId" th:value="${product.id}">
+        <input type="number" name="quantity" min="1" value="1">
+        <button type="submit">Add to Cart</button>
+    </form>
+</div>
 </body>
 </html>
