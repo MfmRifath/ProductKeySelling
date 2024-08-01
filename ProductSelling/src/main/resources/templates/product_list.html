@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <title>Product List</title>
   <style>
@@ -110,14 +110,15 @@
 </head>
 <body>
 <h1>Product List</h1>
-<a class="add-product" href="/products/new">Add New Product</a>
+<a sec:authorize="hasRole('ADMIN')" class="add-product" href="/products/new">Add New Product</a>
 <div th:each="product : ${products}" class="product">
   <h2 th:text="${product.name}">Product Name</h2>
   <img th:src="@{${product.image}}" alt="Product Image"/>
   <p th:text="${product.description}">Product Description</p>
   <p class="price" th:text="${product.price}">Price</p>
-  <a th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
-  <a class="delete" th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a>
+  <a hr>Buy</a>
+  <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
+  <a sec:authorize="hasRole('ADMIN')" class="delete" th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a>
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Product Key Store</title>
-    <link rel="stylesheet" type="text/css" href="/home.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" type="text/css" href="/css/home.css"> <!-- Link to your CSS file -->
 </head>
 <body>
 <!-- Navigation Bar -->
@@ -15,6 +15,9 @@
             <li><a href="/about">About Us</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/carts">Cart</a></li>
+            <form th:action="@{/logout}" method="post" class="logout-form">
+                <i class="fas fa-sign-out-alt"></i><input type="submit" value="Logout" class="btn btn-link text-black" />
+            </form>
         </ul>
     </div>
 </nav>
