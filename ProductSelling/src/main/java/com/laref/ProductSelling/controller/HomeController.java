@@ -12,13 +12,29 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    private final ProductService productService;
+
     @Autowired
-    private ProductService productService;
+    public HomeController(ProductService productService) {
+        this.productService = productService;
+    }
+
+
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
     @GetMapping("/")
     public String home(Model model) {
         List<Product> featuredProducts = productService.getAllProducts(); // For simplicity, using all products as featured
         model.addAttribute("featuredProducts", featuredProducts);
         return "home";
+    }
+
+    @GetMapping("/403")
+    public String accessDenied() {
+        return "403";
     }
 }
