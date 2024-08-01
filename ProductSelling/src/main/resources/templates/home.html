@@ -2,7 +2,262 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Product Key Store</title>
-    <link rel="stylesheet" type="text/css" href="/css/home.css"> <!-- Link to your CSS file -->
+    <style>
+        /* Reset some default browser styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/mnt/data/A_professional_and_clean_background_image_for_a_Pr.png'); /* Replace with the actual path */
+            background-size: cover;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            color: #fff;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        nav .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav .nav-links li {
+            margin: 0 1rem;
+        }
+
+        nav .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav .nav-links a:hover {
+            background: #007bff;
+            border-radius: 4px;
+        }
+
+        .logout-form {
+            display: inline;
+            margin-left: 1rem;
+        }
+
+        .logout-form input {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .logout-form input:hover {
+            color: #ff6347;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideInFromBottom 1s ease-out;
+        }
+
+        .hero .btn {
+            background: #007bff;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .hero .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Featured Products */
+        .featured-products {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .featured-products h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .product {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: calc(33.333% - 2rem);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .product h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: #007bff;
+        }
+
+        .product p {
+            margin-bottom: 0.5rem;
+        }
+
+        .product .btn {
+            background: #28a745;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .product .btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* Customer Testimonials */
+        .testimonials {
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .testimonial {
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .testimonial p {
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .testimonial strong {
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            background: #333;
+            color: #fff;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer .social-links img {
+            width: 24px;
+            height: 24px;
+            margin: 0 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInFromTop {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromBottom {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <!-- Navigation Bar -->
@@ -47,9 +302,6 @@
         </div>
     </div>
 </section>
-
-
-
 
 <!-- Customer Testimonials -->
 <section class="testimonials">

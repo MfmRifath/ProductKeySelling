@@ -3,6 +3,8 @@
 <head>
   <title>Product List</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
     body {
         font-family: 'Roboto', Arial, sans-serif;
         background-color: #f4f4f4;
@@ -15,11 +17,13 @@
         font-size: 32px;
         margin-bottom: 20px;
         text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
     }
 
     .add-product {
         display: block;
-        width: 180px;
+        width: 200px;
         margin: 0 auto 30px;
         padding: 10px;
         background-color: #5cb85c;
@@ -28,11 +32,13 @@
         text-decoration: none;
         border-radius: 6px;
         font-weight: 600;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .add-product:hover {
         background-color: #4cae4c;
+        transform: translateY(-3px);
     }
 
     .product {
@@ -55,10 +61,15 @@
         font-size: 24px;
         color: #333;
         margin-bottom: 15px;
+        transition: color 0.3s;
+    }
+
+    .product:hover h2 {
+        color: #007bff;
     }
 
     .product img {
-        max-width: 100%;
+        max-width: 200px; /* Reduced image size */
         height: auto;
         border-radius: 8px;
         margin-bottom: 15px;
@@ -92,11 +103,13 @@
         color: #fff;
         text-decoration: none;
         border-radius: 6px;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, transform 0.3s;
+        font-weight: 500;
     }
 
     .product a:hover {
         background-color: #025aa5;
+        transform: translateY(-2px);
     }
 
     .product a.delete {
@@ -105,6 +118,14 @@
 
     .product a.delete:hover {
         background-color: #c9302c;
+    }
+
+    .product a.buy {
+        background-color: #5cb85c;
+    }
+
+    .product a.buy:hover {
+        background-color: #4cae4c;
     }
   </style>
 </head>
@@ -116,7 +137,7 @@
   <img th:src="@{${product.image}}" alt="Product Image"/>
   <p th:text="${product.description}">Product Description</p>
   <p class="price" th:text="${product.price}">Price</p>
-  <a hr>Buy</a>
+  <a class="buy" href="#">Buy</a>
   <a sec:authorize="hasRole('ADMIN')" th:href="@{/products/edit/{id}(id=${product.id})}">Edit</a>
   <a sec:authorize="hasRole('ADMIN')" class="delete" th:href="@{/products/delete/{id}(id=${product.id})}">Delete</a>
 </div>

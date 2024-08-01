@@ -3,33 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/css/login.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/images/bg.jpg') no-repeat center center fixed; /* Replace with actual path */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            box-sizing: border-box;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-container h2 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: #333;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: calc(100% - 30px);
+            padding: 0.75rem 2.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            padding-left: 30px;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group .icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .error-message, .success-message {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .error-message p, .success-message p {
+            margin: 0;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 150px;
+        }
+    </style>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+<div class="background-overlay"></div>
 <div class="login-container">
+    <div class="logo-container">
+        <img src="/images/logo.png" alt="ProductKeyStore Logo"> <!-- Replace with actual path -->
+    </div>
     <h2>Login</h2>
-    <form method="post" th:action="@{/login}" >
-        <!-- General error message -->
-        <div class="error-message" style="color: red;">
-            <!-- Replace with server-side error message if any -->
-            <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
-        </div>
+    <form method="post" th:action="@{/login}">
+        <!-- General error and success messages -->
+        <div class="error-message" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+        <div class="success-message" th:if="${loginSuccessMessage}" th:text="${loginSuccessMessage}"></div>
+        <div class="success-message" th:if="${logoutSuccessMessage}" th:text="${logoutSuccessMessage}"></div>
 
         <div class="form-group">
             <label for="username">Username</label>
+            <i class="fas fa-user icon"></i>
             <input type="text" id="username" name="username" required>
             <!-- Error message for username -->
-            <div class="error-message" style="color: red;">
-                <p th:if="${usernameError}" th:text="${usernameError}"></p>
-            </div>
+            <div class="error-message" th:if="${usernameError}" th:text="${usernameError}"></div>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
+            <i class="fas fa-lock icon"></i>
             <input type="password" id="password" name="password" required>
             <!-- Error message for password -->
-            <div class="error-message" style="color: red;">
-                <p th:if="${passwordError}" th:text="${passwordError}"></p>
-            </div>
+            <div class="error-message" th:if="${passwordError}" th:text="${passwordError}"></div>
         </div>
         <button type="submit">Login</button>
     </form>
